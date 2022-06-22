@@ -6,7 +6,7 @@ import Form from "./Form";
 function App() {
   let [data, setData] = useState([]);
   let [clicked, setclicked] = useState([]);
-
+let [array,setarr]=useState([]);
   useEffect( () => {
 let users=async()=>{
 let res= await fetch("https://jsonplaceholder.typicode.com/users")
@@ -25,37 +25,28 @@ let res= await fetch("https://jsonplaceholder.typicode.com/users")
   
 }
  
-
+ 
    users();
 
   }, []);
 
-useEffect(()=>{
-let arr=[];
-for(let i=0;i<data.length;++i){
-
-  let func=async()=>{
-let res = await fetch(
-  `https://api.openweathermap.org/data/2.5/weather?lat=${data[i].loc[0]}&lon=${data[i].loc[1]}&appid=b29c7e45e5dfdc04785de3c37977762f`
-);
-  
-  let dat=await res.json();
-arr.push({...data[i],['address']:dat.timezone});
-
-}
-func();
-setData(arr);
-}
+  useEffect(()=>{
+let  arr=[];
+data.map((e)=>(
 
 
-},[data])
+ fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${e.loc[0]},${e.loc[1]}?key=3S5GEJ6FLKLCS2823ATECF7XA`).then(res=>res.json()).then(data=>arr.push( (data.timezone))).catch(()=>console.log('failed'))
+
+))
+setarr(arr);
+} , [data])
 
 
 
   return (
     <Main>
-      <Users data={data} setclicked={setclicked} />
-      <Form setData={setData} clicked={clicked} setclicked={setclicked} />
+      <Users data={data} setclicked={setclicked} arr={array} />
+      <Form setData={setData} clicked={clicked} />
     </Main>
   );
 }
