@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Card, CardContent, Typography } from "@material-ui/core";
 
-function Users({ data, setclicked }) {
+function Users({ data, setclicked,arr }) {
+  console.log(arr)
   return (
     <List>
       {data?.map((elem, id) => (
         <Card
           key={id}
           onClick={() => {
-            setclicked([elem.name, elem.id, elem.address]);
+            setclicked([elem.name, elem.id, arr[id]]);
           }}
           style={{
             cursor: "pointer",
@@ -44,27 +45,11 @@ function Users({ data, setclicked }) {
               </Typography>
 
               <Typography color="textSecondary" variant="h5">
-                {elem.address}
+                {arr[id]}
               </Typography>
             </Flex>
             <Flex>
-              <Typography color="textPrimary" variant="h6">
-                Title:
-              </Typography>
-
-              <Typography color="textSecondary" variant="h5">
-                {elem?.title}
-              </Typography>
-            </Flex>
-
-            <Flex>
-              <Typography color="textPrimary" variant="h6">
-                Body:
-              </Typography>
-
-              <Typography color="textSecondary" variant="h5">
-                {elem?.body}
-              </Typography>
+           
             </Flex>
           </CardContent>
         </Card>
