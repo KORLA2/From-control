@@ -23,7 +23,7 @@ setclicked([clicked[0], clicked[1], value]);
     <Forms>
 {
 correct===0?'':(<Popup>
-  <Typography color="textPrimary" variant="h6">Submitting data to ....</Typography>
+  <Typography color="textPrimary" variant="h6">Submitting data to .... https://jsonplaceholder.typicode.com/posts</Typography>
 
 
 <Flex>
